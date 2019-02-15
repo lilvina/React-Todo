@@ -18,9 +18,12 @@ class App extends React.Component {
   addTodos = event => {
     event.preventDefault()
 
+    if(this.state.task === '') return;
+
     const newTodos = {
       task: this.state.task,
-      id: Date.now()
+      id: Date.now(),
+      completed: false,
     }
     this.setState({
       todos: [...this.state.todos, newTodos],
@@ -29,18 +32,37 @@ class App extends React.Component {
   }
 
   handleTodos = event => {
-    console.log(this.state.task)
+    //console.log(this.state.task)
     this.setState({
-      task: event.target.value
+      [event.target.name]: event.target.value
+    })
+  }
+
+  clickList = event => {
+    let clickListId = parseFloat(event.target.id)
+    this.state.todos.forEach(item => {
+      if(clickListId === item.id) {
+        item.completed = !item.completed
+      }
+    })
+    event.target.classList.toggle('completed')
+  }
+
+  clearTodo = event => {
+    event.preventDefault()
+    this.setState({
+      todos: this.state.todos.filter(item => item.completed === false)
     })
   }
 
   render() {
     return (
-      <div>
+      <div className="todo-container">
         <h3>My TodoList</h3>
-        <TodoList todos={this.state.todos} />
-        <TodoForm onSubmit={this.addTodos} onChange={this.handleTodos} value={this.state.task} />
+        <div className="list" onClick={this.clickList}>
+          <TodoList todos={this.state.todos} />
+        </div>
+        <TodoForm onSubmit={this.addTodos} onChange={this.handleTodos} value={this.state.task} clearTodo={this.clearTodo}/>
       </div>
     )
   }
