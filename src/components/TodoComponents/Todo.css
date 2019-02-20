@@ -1,0 +1,45 @@
+body {
+  background-color: pink;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+div,
+p,
+span {
+  color: #ffffff;
+  font-family: cursive;
+}
+
+.todo-container {
+  text-align: center;
+  padding: 0 35px;
+  max-width: 665px;
+  margin: 0 auto;
+}
+
+.list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.todo-list {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* .item {
+  background-color: red;
+  width: 45%;
+  text-align: left;
+  margin: 4px 0;
+  padding-left: 8px;
+} */
